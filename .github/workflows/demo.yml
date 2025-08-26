@@ -3,8 +3,15 @@ on:
   push:
     branches:
       - dev
+env:
+  MONGODB_DB_NAME: gha-demo
 jobs:
   test:
+    env:
+      MONGODB_CLUSTER_ADDRESS: cluster0.129ieyr.mongodb.net
+      MONGODB_USERNAME: maheyettdd
+      MONGODB_PASSWORD: 63524gqcssrr2
+      PORT: 8080
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -58,5 +65,6 @@ jobs:
       - name: Output filename
         run: echo "${{ needs.build.outputs.script-file }}
       - name: Deploy
-        run: echo "Deploying....."
-  
+        run: | 
+          echo "Deploying....."
+          echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
